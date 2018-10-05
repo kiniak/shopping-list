@@ -1,32 +1,32 @@
 <template>
     <div id="app" v-cloak>
           <div class="myList">
-            <table v-if="lists.length">
-              <thead>
-                <tr>
-                  <th>lp.</th>
-                  <th>produkt</th>
-                  <th>ilość</th>
-                   <th>usuń</th>
-                </tr>
-              </thead>
+            <input type="text" placeholder="wpisz produkt" v-model.trim="product">
+            <input id="number" type="number" value="1" placeholder="0" min="1" v-model.number="quantity">
+            <button :disabled="!isFilled" @click="add">dodaj</button>
+              <table v-if="lists.length">
+                <thead>
+                  <tr>
+                    <th>lp.</th>
+                    <th>produkt</th>
+                    <th>ilość</th>
+                    <th>usuń</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <tr v-for="(list, index) in lists" >
-                  <td>{{index+1}}.</td>
-                  <td>{{list.product}}</td>
-                  <td class="quantity"><div @click="minus(index)">-</div>{{list.quantity}}<div @click="plus(index)">+</div></td>
-                  <td @click="remove(index)"><i class="fas fa-trash-alt"></i></td>
-                </tr>
-              </tbody>
-          </table>
-          <div class="empty" v-else>
-            <p>brak zakupów</p>
-          </div>
-          </div>
-          <input type="text" placeholder="wpisz produkt" v-model.trim="product">
-          <input id="number" type="number" value="1" placeholder="0" min="1" v-model.number="quantity">
-          <button :disabled="!isFilled" @click="add">dodaj</button>
+                <tbody>
+                  <tr v-for="(list, index) in lists" >
+                    <td>{{index+1}}.</td>
+                    <td>{{list.product}}</td>
+                    <td class="quantity"><div @click="minus(index)">-</div>{{list.quantity}}<div @click="plus(index)">+</div></td>
+                    <td @click="remove(index)"><i class="fas fa-trash-alt"></i></td>
+                  </tr>
+                </tbody>
+            </table>
+            <div class="empty" v-else>
+              <p>brak zakupów</p>
+            </div>
+            </div>
         </div>
 </template>
 
