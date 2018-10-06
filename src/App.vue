@@ -120,6 +120,9 @@ input[type="number"]{
   border: 1px solid black;
   margin: 0 1.5rem;
   border-radius: 10px;
-
+  cursor: pointer;
+}
+i.fas.fa-trash-alt{
+  cursor: pointer;
 }
 </style>
