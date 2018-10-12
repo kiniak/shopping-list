@@ -1,5 +1,6 @@
 <template>
     <div id="app" v-cloak>
+      <p class="dubleProduct">{{message}}</p>
           <div class="myList">
             <input type="text" placeholder="wpisz produkt" v-model.trim="product">
             <input id="number" type="number" value="1" placeholder="0" min="1" v-model.number="quantity">
@@ -40,20 +41,27 @@ export default {
               product: '',
               quantity: '',
               lists: [],
+              message: '',
       }
     },
     computed:{
               isFilled: function(){
                 return this.product && this.quantity>0;
-              }
+              },
             },
      methods: {
               add: function(){
-               this.lists.push(
+                if(this.lists.find(item => item.product===this.product)){
+                  this.message= this.product + " jest już na liście zakupów";
+                  this.product="";
+                }else{
+                   this.lists.push(
                     {product: this.product, quantity: this.quantity}
                   );
                   this.product="";
                   this.quantity ="";
+                }
+                    
               },
               remove: function(index){
                 this.lists.splice(index, 1);
@@ -95,7 +103,9 @@ tbody tr td{
   font-size: 1.6rem;
   padding: 1rem;
 }
-
+.dubleProduct{
+   font-size: 1.6rem;
+}
 .myList{
   display: block;
 }
